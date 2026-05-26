@@ -15,6 +15,16 @@
 - Added a first-pass `/admin/leads` dashboard and JSON-LD corporate/founder schema.
 - Synced the app header, utility bar, service mega-menu, and service URL coverage to the live RQS navigation structure.
 - Added alias route support so legacy/live service URL variants resolve through the same central content source.
+- Added runtime site-config loading with MongoDB persistence and static `site.config.ts` fallback.
+- Added protected admin auth flow: login, logout, middleware gating, and a secret bootstrap page for initial admin creation.
+- Added a full admin site-config editor for the complete site object, including large array sections like `entries`.
+- Added live lead status updating inside the admin leads dashboard.
+- Added a `framer-motion` live home background designed to stay responsive and motion-safe on mobile.
+- Added no-cache API responses and global security/no-cache headers in Next config.
+- Added service and card image support, including admin-managed image URLs and uploads stored inside the runtime site config snapshot.
+- Reworked the engineering desk support UI into a responsive mobile bottom-sheet / desktop drawer layout.
+- Reworked the mobile navigation into a clean header-anchored responsive panel so the menu no longer hides behind the sticky header UI on phones.
+- Added a new reusable `offeringsGrid` section type and used it on the services page for a CMS-driven consultancy services matrix.
 - Installed `framer-motion`, `mongodb`, `clsx`, and `tailwind-merge`.
 
 ## Remaining In Initial Phase
@@ -25,7 +35,9 @@
 - Add stronger internal linking between service pages, case study themes, and articles.
 - Audit the live site one more time for any page URLs outside the current sitemap and nav-based migration set.
 - Connect live MongoDB credentials and verify end-to-end lead persistence in production.
-- Add authenticated status updates on `/admin/leads` instead of read-only badges.
+- Replace the JSON-based site-config editor with richer field-by-field controls for non-technical admins.
+- Expand admin editing beyond config storage into dedicated media, page builder, and audit history workflows.
+- Extend the image manager beyond services so every non-service card collection has dedicated visual controls too.
 
 ## Later Advanced Phase
 

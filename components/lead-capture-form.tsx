@@ -69,18 +69,18 @@ export function LeadCaptureForm({
   }
 
   return (
-    <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
-      <div className="rounded-[calc(var(--radius-xl)-0.5rem)] border border-[rgba(0,194,255,0.18)] bg-[var(--gradient-hero)] p-8 text-white shadow-[var(--shadow-panel)]">
+    <div className="grid gap-5 lg:grid-cols-[1.05fr_0.95fr]">
+      <div className="rounded-[calc(var(--radius-xl)-0.5rem)] border border-[rgba(0,194,255,0.18)] bg-[var(--gradient-hero)] p-5 text-white shadow-[var(--shadow-panel)] sm:p-7">
         <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--color-accent)]">
           Rapid RFQ
         </p>
-        <h3 className="mt-4 text-3xl font-semibold tracking-[-0.04em] text-slate-800">{title}</h3>
-        <p className="mt-4 text-sm leading-7 text-slate-800">{description}</p>
-        <div className="mt-8 space-y-3">
+        <h3 className="mt-4 text-2xl font-semibold tracking-[-0.04em] text-slate-900 sm:text-3xl">{title}</h3>
+        <p className="mt-4 text-sm leading-7 text-slate-900">{description}</p>
+        <div className="mt-6 space-y-3">
           {trustCallouts.map((callout) => (
             <div
               key={callout}
-              className="rounded-2xl border border-white/10 bg-white/6 p-4 text-sm leading-7 text-slate-800"
+              className="rounded-2xl border border-white/10 bg-white/8 p-4 text-sm leading-7 text-slate-900"
             >
               {callout}
             </div>
@@ -89,7 +89,7 @@ export function LeadCaptureForm({
       </div>
       <form
         onSubmit={handleSubmit}
-        className="rounded-[calc(var(--radius-xl)-0.5rem)] border border-slate-200 bg-white/95 p-6 shadow-[0_20px_80px_rgba(8,17,31,0.08)]"
+        className="rounded-[calc(var(--radius-xl)-0.5rem)] border border-slate-200 bg-white/95 p-5 shadow-[0_20px_80px_rgba(8,17,31,0.08)] sm:p-6"
       >
         <div className={`grid gap-4 ${compact ? "" : "sm:grid-cols-2"}`}>
           <label className="text-sm font-medium text-slate-700">

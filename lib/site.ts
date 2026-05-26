@@ -1,8 +1,13 @@
 import { cache } from "react";
+import { unstable_noStore as noStore } from "next/cache";
 
-import { siteConfig } from "@/content/site.config";
+import { loadRuntimeSiteConfig } from "@/lib/site-config-store";
 
-export const getSiteConfig = cache(async () => siteConfig);
+export const getSiteConfig = cache(async () => {
+  noStore();
+  const { config } = await loadRuntimeSiteConfig();
+  return config;
+});
 
 export const getAllEntries = cache(async () => {
   const config = await getSiteConfig();

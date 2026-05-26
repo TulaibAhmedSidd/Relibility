@@ -27,28 +27,42 @@ export async function POST(request: Request) {
           message:
             "Lead capture is not configured yet. Add MONGODB_URI to enable submissions.",
         },
-        { status: 503 },
+        {
+          status: 503,
+          headers: { "Cache-Control": "no-store, no-cache, must-revalidate" },
+        },
       );
     }
 
     const lead = await Lead.create(parsed);
 
-    return Response.json({
-      success: true,
-      id: lead._id,
-      message: "Your request has been submitted to RQS.",
-    });
+    return Response.json(
+      {
+        success: true,
+        id: lead._id,
+        message: "Your request has been submitted to RQS.",
+      },
+      {
+        headers: { "Cache-Control": "no-store, no-cache, must-revalidate" },
+      },
+    );
   } catch (error) {
     if (error instanceof z.ZodError) {
       return Response.json(
         { success: false, message: "Please complete all required fields correctly." },
-        { status: 400 },
+        {
+          status: 400,
+          headers: { "Cache-Control": "no-store, no-cache, must-revalidate" },
+        },
       );
     }
 
     return Response.json(
       { success: false, message: "Unable to save the lead at this time." },
-      { status: 500 },
+      {
+        status: 500,
+        headers: { "Cache-Control": "no-store, no-cache, must-revalidate" },
+      },
     );
   }
 }

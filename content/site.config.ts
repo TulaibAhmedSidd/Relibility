@@ -11,6 +11,10 @@ export type HeroSection = {
   primaryCta: NavItem;
   secondaryCta: NavItem;
   highlights: string[];
+  image?: {
+    src: string;
+    alt: string;
+  };
 };
 
 export type StatsSection = {
@@ -36,6 +40,10 @@ export type CardsSection = {
     description: string;
     href?: string;
     meta?: string;
+    image?: {
+      src: string;
+      alt: string;
+    };
   }>;
 };
 
@@ -47,6 +55,18 @@ export type TimelineSection = {
   steps: Array<{
     title: string;
     description: string;
+  }>;
+};
+
+export type OfferingsGridSection = {
+  type: "offeringsGrid";
+  eyebrow: string;
+  title: string;
+  description: string;
+  columns: Array<{
+    title: string;
+    accent?: boolean;
+    bullets: string[];
   }>;
 };
 
@@ -93,6 +113,7 @@ export type PageSection =
   | StatsSection
   | CardsSection
   | TimelineSection
+  | OfferingsGridSection
   | TestimonialsSection
   | RichTextSection
   | ArticleListSection
@@ -158,6 +179,10 @@ export type SiteConfig = {
     description: string;
     meta: string;
     aliases?: string[];
+    image: {
+      src: string;
+      alt: string;
+    };
   }>;
   industries: Array<{
     title: string;
@@ -192,6 +217,10 @@ const serviceCards = [
     description:
       "Reduce execution risk when designs move into manufacturing through disciplined transfer planning.",
     meta: "Design transfer, launch risk, and manufacturing readiness",
+    image: {
+      src: "/services/prevention.svg",
+      alt: "Design transfer engineering illustration",
+    },
   },
   {
     title: "Reliability Engineering & Analysis",
@@ -200,6 +229,10 @@ const serviceCards = [
     description:
       "Reliability programs that reduce field risk, accelerate learning, and strengthen launch confidence.",
     meta: "Strategy, modeling, and failure prevention",
+    image: {
+      src: "/services/analysis.svg",
+      alt: "Reliability analysis illustration",
+    },
   },
   {
     title: "Supplier Management Improve Quality",
@@ -208,6 +241,10 @@ const serviceCards = [
     description:
       "Supplier development, incoming quality strategy, and escalation systems for global supply chains.",
     meta: "SQE leadership and containment workflows",
+    image: {
+      src: "/services/supplier.svg",
+      alt: "Supplier quality illustration",
+    },
   },
   {
     title: "Engineering Project Management",
@@ -216,6 +253,10 @@ const serviceCards = [
     description:
       "Coordinate engineering execution, decisions, and accountability around quality and reliability objectives.",
     meta: "Cross-functional program leadership",
+    image: {
+      src: "/services/manufacturing.svg",
+      alt: "Engineering project management illustration",
+    },
   },
   {
     title: "Manufacturing Process Control",
@@ -224,6 +265,10 @@ const serviceCards = [
     description:
       "Improve process capability and control strategy with engineering-led manufacturing discipline.",
     meta: "SPC, process capability, and control planning",
+    image: {
+      src: "/services/manufacturing.svg",
+      alt: "Manufacturing process control illustration",
+    },
   },
   {
     title: "Semiconductor Device Qualification",
@@ -232,6 +277,10 @@ const serviceCards = [
     description:
       "Qualification support for semiconductor devices, packaging, and reliability-sensitive changes.",
     meta: "Semiconductor qualification and change risk",
+    image: {
+      src: "/services/qualification.svg",
+      alt: "Semiconductor qualification illustration",
+    },
   },
   {
     title: "DFX, DFMEA, PFMEA",
@@ -239,6 +288,10 @@ const serviceCards = [
     description:
       "Structured risk identification and mitigation across design, process, and launch transitions.",
     meta: "Cross-functional risk reduction",
+    image: {
+      src: "/services/analysis.svg",
+      alt: "FMEA risk analysis illustration",
+    },
   },
   {
     title: "ISO 9001-2015 Certification",
@@ -246,6 +299,10 @@ const serviceCards = [
     description:
       "Support quality management system maturity, implementation, and disciplined ISO-aligned operating practices.",
     meta: "QMS implementation and audit readiness",
+    image: {
+      src: "/services/quality.svg",
+      alt: "ISO quality systems illustration",
+    },
   },
   {
     title: "Customer Complaints Resolution",
@@ -253,6 +310,10 @@ const serviceCards = [
     description:
       "Respond to customer complaints with structured containment, root-cause rigor, and sustained closure.",
     meta: "Containment, CAPA, and response management",
+    image: {
+      src: "/services/quality.svg",
+      alt: "Customer complaint resolution illustration",
+    },
   },
   {
     title: "Packaging & Product Qualification",
@@ -260,6 +321,10 @@ const serviceCards = [
     description:
       "Create evidence-backed qualification plans for packaging, assemblies, and release readiness decisions.",
     meta: "Qualification strategy and evidence packages",
+    image: {
+      src: "/services/qualification.svg",
+      alt: "Product qualification illustration",
+    },
   },
   {
     title: "Engineering Quality Control in US",
@@ -267,6 +332,10 @@ const serviceCards = [
     description:
       "Build robust quality control systems that improve consistency, containment, and customer confidence.",
     meta: "Quality control systems and execution",
+    image: {
+      src: "/services/quality.svg",
+      alt: "Quality control illustration",
+    },
   },
   {
     title: "Engineering Process Integration for Reliability and Quality",
@@ -274,6 +343,10 @@ const serviceCards = [
     description:
       "Align design, operations, and quality functions through integrated process planning and ownership.",
     meta: "Cross-functional integration and governance",
+    image: {
+      src: "/services/manufacturing.svg",
+      alt: "Engineering process integration illustration",
+    },
   },
   {
     title: "CQE & Supplier Management SQE",
@@ -281,6 +354,10 @@ const serviceCards = [
     description:
       "Strengthen supplier quality engineering through better escalation, qualification, and relationship control.",
     meta: "CQE, SQE, and supplier development",
+    image: {
+      src: "/services/supplier.svg",
+      alt: "Supplier management illustration",
+    },
   },
   {
     title: "Prediction and Fatigue Life Estimates",
@@ -288,6 +365,10 @@ const serviceCards = [
     description:
       "Use engineering estimates and durability thinking to anticipate life limits and failure drivers earlier.",
     meta: "Durability estimates and fatigue planning",
+    image: {
+      src: "/services/analysis.svg",
+      alt: "Prediction and fatigue illustration",
+    },
   },
   {
     title: "Accelerated Life Testing Engineering",
@@ -295,6 +376,10 @@ const serviceCards = [
     description:
       "HALT, HASS, and accelerated test planning tailored to real operating profiles and expected service life.",
     meta: "Qualification, acceleration models, and decision support",
+    image: {
+      src: "/services/qualification.svg",
+      alt: "Accelerated life testing illustration",
+    },
   },
   {
     title: "Quality Manufacturing Process Controls, Yield Improvement",
@@ -302,6 +387,10 @@ const serviceCards = [
     description:
       "Improve yield with process understanding, defect reduction, and practical quality engineering controls.",
     meta: "Yield, defects, and manufacturing controls",
+    image: {
+      src: "/services/manufacturing.svg",
+      alt: "Yield improvement illustration",
+    },
   },
   {
     title: "Failure Analysis and Corrective Action",
@@ -309,6 +398,10 @@ const serviceCards = [
     description:
       "Investigate failures, isolate causes, and convert learning into corrective action that holds up operationally.",
     meta: "Root cause, corrective action, and closure",
+    image: {
+      src: "/services/analysis.svg",
+      alt: "Failure analysis illustration",
+    },
   },
   {
     title: "Engineering Prevention Over Inspection",
@@ -316,6 +409,10 @@ const serviceCards = [
     description:
       "Shift quality effort upstream by preventing issues before they become recurring inspection or field problems.",
     meta: "Prevention, systemic quality, and design thinking",
+    image: {
+      src: "/services/prevention.svg",
+      alt: "Engineering prevention illustration",
+    },
   },
 ];
 
@@ -439,6 +536,79 @@ const sharedCtaSection: CtaSection = {
     "Whether you need a focused assessment or a long-term engineering partner, RQS can help your team move with more confidence.",
   primaryCta: { label: "Contact RQS", href: "/contact-us" },
   secondaryCta: { label: "Explore Services", href: "/professional-engineering-consultancy-services-in-usa" },
+};
+
+const consultancyOfferingsSection: OfferingsGridSection = {
+  type: "offeringsGrid",
+  eyebrow: "Consultancy Services Offered",
+  title: "A broader consultancy menu.",
+  description:
+    "Product Qualification, Quality Management System and Implementation, Reliability Engineering and NPI System, Manufacturing Process Controls, Training and Education, Papers and Publications.",
+  columns: [
+    {
+      title: "Product Qualification",
+      bullets: [
+        "Standards support across JEDEC, Bellcore GR1221, SR332, and related reliability frameworks.",
+        "IPC, IEC, and MIL-standard aligned qualification planning for electronic products and assemblies.",
+        "UL certification and EV battery qualification support for regulated product programs.",
+        "Semiconductor device qualification for packaging, change control, and release confidence.",
+        "Product qualification support spanning EVT, DVT, DMT, RDT, and release-readiness reviews.",
+        "Package qualification and product qualification planning for high-consequence launches.",
+      ],
+    },
+    {
+      title: "Quality Management System and Implementation",
+      bullets: [
+        "Development and implementation of practical quality management systems.",
+        "Customer Quality Engineering and Supplier Quality Engineering support.",
+        "Quality yield improvement across design and manufacturing workflows.",
+        "Qualification support for ISO 9001, ISO 14001, and aligned operating structures.",
+        "Product quality engineering support for execution discipline and issue closure.",
+        "Quality and reliability planning for lithium-ion batteries across EV and larger vehicle applications.",
+      ],
+    },
+    {
+      title: "Reliability Engineering and NPI System",
+      accent: true,
+      bullets: [
+        "Reliability program design and implementation tailored to product maturity and field risk.",
+        "Reliability engineering support specific to product needs, validation stages, and launch timing.",
+        "Reliability tests, analysis, modeling, prediction, and useful-life characterization.",
+        "Reliability maintainability and warranty-oriented learning loops for design improvement.",
+        "Burn-in systems, ORT, RDT, HALT, HASS, and accelerated life test planning.",
+        "Step-stress, corner reliability testing, fatigue life analysis, DFX, DFMEA, and PFMEA support.",
+        "Reliability assessment for lithium-ion battery applications in automotive and related environments.",
+      ],
+    },
+    {
+      title: "Manufacturing Process Controls",
+      bullets: [
+        "Quality and reliability manufacturing control systems built for sustained execution.",
+        "Manufacturing PCB and PCBA process guidance including AOI, screen printing, solder paste, reflow, and inspection readiness.",
+        "IR process, yield improvement, SPC, and process control capability planning.",
+        "Supplier management quality and data logging workflows for key product manufacturing.",
+        "Comprehensive manufacturing review reporting and integration with supply-chain decision making.",
+      ],
+    },
+    {
+      title: "Training and Education",
+      bullets: [
+        "Comprehensive reliability and quality plan implementation education.",
+        "Reliability and quality integration training for NPI processes from introduction through field use.",
+        "Electronic cooling, thermal analysis, and product-specific cooling requirement training.",
+        "Vibration analysis, test strategy, and vibration equipment selection guidance.",
+        "Device and package qualification education aligned with JEDEC and MIL-oriented expectations.",
+        "Cooling design support from system and chassis level down to PCBA and component constraints.",
+      ],
+    },
+    {
+      title: "Papers and Publications",
+      bullets: [
+        "Consultant-led technical papers, publications, and supporting engineering references are available on request.",
+        "Contact the consultants to request publication topics, technical background, or speaking and workshop support.",
+      ],
+    },
+  ],
 };
 
 export const siteConfig: SiteConfig = {
@@ -571,6 +741,7 @@ export const siteConfig: SiteConfig = {
             "Enterprise-ready support for complex hardware programs",
           ],
         },
+        consultancyOfferingsSection,
         {
           type: "stats",
           eyebrow: "Trust Indicators",
@@ -596,6 +767,7 @@ export const siteConfig: SiteConfig = {
             description: service.description,
             href: `/${service.slug}`,
             meta: service.meta,
+            image: service.image,
           })),
         },
         {
@@ -608,6 +780,10 @@ export const siteConfig: SiteConfig = {
           items: industries.map((industry) => ({
             title: industry.title,
             description: industry.description,
+            image: {
+              src: "/services/manufacturing.svg",
+              alt: `${industry.title} engineering illustration`,
+            },
           })),
         },
         {
@@ -870,6 +1046,7 @@ export const siteConfig: SiteConfig = {
             "Supplier and manufacturing quality support",
           ],
         },
+        consultancyOfferingsSection,
         {
           type: "cards",
           eyebrow: "Core Services",
@@ -882,6 +1059,7 @@ export const siteConfig: SiteConfig = {
             description: service.description,
             href: `/${service.slug}`,
             meta: service.meta,
+            image: service.image,
           })),
         },
         sharedCtaSection,
@@ -1098,6 +1276,7 @@ export const siteConfig: SiteConfig = {
             "Structured support tailored to product and manufacturing context",
             "Actionable outputs tied to risk reduction and execution",
           ],
+          image: serviceCards.find((service) => service.slug === page.slug)?.image,
         },
         {
           type: "richText" as const,
@@ -1127,6 +1306,7 @@ export const siteConfig: SiteConfig = {
             title: service.title,
             description: service.description,
             href: `/${service.slug}`,
+            image: service.image,
           })),
         },
         sharedCtaSection,

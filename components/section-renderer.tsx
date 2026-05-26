@@ -1,8 +1,10 @@
+import Image from "next/image";
 import Link from "next/link";
 
 import type { ContentEntry, PageSection } from "@/content/site.config";
 import { AnimatedHeading } from "@/components/animated-heading";
 import { ServiceCard, IndustryCard } from "@/components/cards";
+import { ConsultancyOfferingsGrid } from "@/components/consultancy-offerings-grid";
 import { CTASection } from "@/components/cta-section";
 import { LeadCaptureForm } from "@/components/lead-capture-form";
 import { MetricCounter } from "@/components/metric-counter";
@@ -41,13 +43,64 @@ async function ArticleList({ slugs }: { slugs: string[] }) {
   );
 }
 
-function renderCards(section: Extract<PageSection, { type: "cards" }>) {
+function getFallbackCardImage(
+  variant: Extract<PageSection, { type: "cards" }>["variant"],
+) {
+  switch (variant) {
+    case "industries":
+      return {
+        src: "/services/manufacturing.svg",
+        alt: "Industry illustration",
+      };
+    case "caseStudies":
+      return {
+        src: "/services/analysis.svg",
+        alt: "Case study illustration",
+      };
+    case "links":
+      return {
+        src: "/services/quality.svg",
+        alt: "Engineering services illustration",
+      };
+    case "services":
+    default:
+      return {
+        src: "/services/qualification.svg",
+        alt: "Service illustration",
+      };
+  }
+}
+
+function renderCards(
+  section: Extract<PageSection, { type: "cards" }>,
+  config: Awaited<ReturnType<typeof getSiteConfig>>,
+) {
   const CardComponent =
     section.variant === "industries" ? IndustryCard : ServiceCard;
 
+  const resolvedItems = section.items.map((item) => {
+    if (item.image) {
+      return item;
+    }
+
+    const serviceFromHref = config.services.find(
+      (service) => item.href === `/${service.slug}` || item.href === `/${service.aliases?.[0]}`,
+    );
+    const serviceFromTitle = config.services.find(
+      (service) => service.title === item.title,
+    );
+    const matchedService = serviceFromHref ?? serviceFromTitle;
+
+    if (matchedService) {
+      return { ...item, image: matchedService.image };
+    }
+
+    return { ...item, image: getFallbackCardImage(section.variant) };
+  });
+
   return (
     <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-      {section.items.map((item) => (
+      {resolvedItems.map((item) => (
         <CardComponent key={item.title} item={item} />
       ))}
     </div>
@@ -94,7 +147,17 @@ export async function SectionRenderer({ sections }: { sections: PageSection[] })
                   </div>
                 </div>
                 <div className="relative overflow-hidden rounded-[var(--radius-xl)] border border-[rgba(0,194,255,0.18)] bg-[var(--gradient-hero)] p-8 text-white shadow-[var(--shadow-panel)]">
+                  {section.image ? (
+                    <Image
+                      src={section.image.src}
+                      alt={section.image.alt}
+                      fill
+                      className="object-cover opacity-28"
+                      sizes="(max-width: 1024px) 100vw, 40vw"
+                    />
+                  ) : null}
                   <div className="absolute inset-0 opacity-25 [background-image:linear-gradient(rgba(255,255,255,0.2)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.2)_1px,transparent_1px)] [background-size:30px_30px]" />
+                  <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,17,31,0.28),rgba(8,17,31,0.58))]" />
                   <div className="relative">
                     <p className="text-sm font-semibold uppercase tracking-[0.28em] text-[var(--color-accent)]">
                       Engineering Signals
@@ -105,7 +168,7 @@ export async function SectionRenderer({ sections }: { sections: PageSection[] })
                           key={highlight}
                           className="rounded-2xl border border-white/10 bg-white/6 p-4 backdrop-blur"
                         >
-                          <p className="text-sm leading-7 text-slate-800">{highlight}</p>
+                          <p className="text-sm leading-7 text-slate-100">{highlight}</p>
                         </div>
                       ))}
                     </div>
@@ -131,7 +194,10 @@ export async function SectionRenderer({ sections }: { sections: PageSection[] })
                   ))}
                 </div>
               ) : null}
-              {section.type === "cards" ? renderCards(section) : null}
+              {section.type === "cards" ? renderCards(section, config) : null}
+              {section.type === "offeringsGrid" ? (
+                <ConsultancyOfferingsGrid columns={section.columns} />
+              ) : null}
               {section.type === "timeline" ? <Timeline steps={section.steps} /> : null}
               {section.type === "testimonials" ? (
                 <TestimonialSlider items={section.items} />

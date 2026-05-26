@@ -1,10 +1,11 @@
+import type { CSSProperties } from "react";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
 import { EngineeringDeskWidget } from "@/components/engineering-desk-widget";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { siteConfig } from "@/content/site.config";
+import { getSiteConfig } from "@/lib/site";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -18,13 +19,14 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteConfig.company.website),
+  metadataBase: new URL("https://reliabilityqualitysolutions.com"),
   title: {
     default: "Reliability Quality Solutions",
     template: "%s | Reliability Quality Solutions",
   },
-  description: siteConfig.company.description,
-  applicationName: siteConfig.company.name,
+  description:
+    "High-end engineering consultancy focused on reliability, quality, qualification, and new product introduction for complex products and demanding industries.",
+  applicationName: "Reliability Quality Solutions",
   keywords: [
     "reliability engineering",
     "quality engineering",
@@ -33,13 +35,14 @@ export const metadata: Metadata = {
     "product qualification",
     "supplier quality",
   ],
-  authors: [{ name: siteConfig.company.name }],
-  creator: siteConfig.company.name,
-  publisher: siteConfig.company.name,
+  authors: [{ name: "Reliability Quality Solutions" }],
+  creator: "Reliability Quality Solutions",
+  publisher: "Reliability Quality Solutions",
   openGraph: {
-    title: siteConfig.company.name,
-    description: siteConfig.company.description,
-    siteName: siteConfig.company.name,
+    title: "Reliability Quality Solutions",
+    description:
+      "High-end engineering consultancy focused on reliability, quality, qualification, and new product introduction for complex products and demanding industries.",
+    siteName: "Reliability Quality Solutions",
     type: "website",
   },
   robots: {
@@ -48,11 +51,14 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export const dynamic = "force-dynamic";
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const siteConfig = await getSiteConfig();
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
@@ -99,7 +105,24 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} scroll-smooth`}
     >
-      <body className="min-h-screen bg-[var(--color-light)] text-slate-900 antialiased">
+      <body
+        className="min-h-screen bg-[var(--color-light)] text-slate-900 antialiased"
+        style={
+          {
+            "--color-primary": siteConfig.theme.colors.primary,
+            "--color-secondary": siteConfig.theme.colors.secondary,
+            "--color-accent": siteConfig.theme.colors.accent,
+            "--color-dark": siteConfig.theme.colors.dark,
+            "--color-light": siteConfig.theme.colors.light,
+            "--color-neutral": siteConfig.theme.colors.neutral,
+            "--color-success": siteConfig.theme.colors.success,
+            "--color-warning": siteConfig.theme.colors.warning,
+            "--gradient-hero": siteConfig.theme.gradients.hero,
+            "--shadow-panel": siteConfig.theme.shadow,
+            "--radius-xl": siteConfig.theme.radius,
+          } as CSSProperties
+        }
+      >
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}

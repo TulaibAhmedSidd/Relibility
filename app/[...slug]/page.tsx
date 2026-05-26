@@ -2,23 +2,13 @@ import { notFound } from "next/navigation";
 
 import { SectionRenderer } from "@/components/section-renderer";
 import { buildMetadata } from "@/lib/metadata";
-import { getAllEntries, getEntryBySlug } from "@/lib/site";
+import { getEntryBySlug } from "@/lib/site";
+
+export const dynamic = "force-dynamic";
 
 type RouteProps = {
   params: Promise<{ slug: string[] }>;
 };
-
-export async function generateStaticParams() {
-  const entries = await getAllEntries();
-
-  return entries.flatMap((entry) => {
-    const slugs = [entry.slug, ...(entry.aliases ?? [])].filter(Boolean);
-
-    return slugs.map((slug) => ({
-      slug: slug.split("/"),
-    }));
-  });
-}
 
 export async function generateMetadata({ params }: RouteProps) {
   const { slug } = await params;

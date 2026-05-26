@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { MobileNav } from "@/components/mobile-nav";
 import { getHeaderNavigation, getSiteConfig } from "@/lib/site";
 
 export async function SiteHeader() {
@@ -37,12 +38,12 @@ export async function SiteHeader() {
                 priority
               />
             </div>
-            <div>
+            {/* <div>
               <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[var(--color-secondary)]">
                 {config.company.shortName}
               </p>
               <p className="text-sm text-slate-600">{config.company.tagline}</p>
-            </div>
+            </div> */}
           </Link>
           <nav className="hidden items-center gap-7 lg:flex">
             {navigation.map((item) =>
@@ -85,10 +86,16 @@ export async function SiteHeader() {
           </nav>
           <Link
             href="/contact-us"
-            className="inline-flex items-center justify-center rounded-full bg-[var(--color-primary)] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[var(--color-secondary)]"
+            className="hidden items-center justify-center rounded-full bg-[var(--color-primary)] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[var(--color-secondary)] lg:inline-flex"
           >
             {config.leadCapture.stickyCtaLabel}
           </Link>
+          <MobileNav
+            headerItems={navigation}
+            utilityItems={config.navigation.utility}
+            serviceGroups={config.navigation.serviceGroups}
+            requestLabel={config.leadCapture.stickyCtaLabel}
+          />
         </div>
       </div>
     </header>

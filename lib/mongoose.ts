@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const uri = process.env.MONGODB_URI;
+const uri = process.env.MONGODB_URI ?? process.env.MONGO_URI;
 
 declare global {
   var __rqsMongooseConnection__: Promise<typeof mongoose> | undefined;

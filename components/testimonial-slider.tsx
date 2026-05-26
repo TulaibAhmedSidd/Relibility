@@ -31,7 +31,7 @@ export function TestimonialSlider({ items }: TestimonialSliderProps) {
           exit={{ opacity: 0, y: -12 }}
           transition={{ duration: 0.35, ease: "easeOut" }}
         >
-          <p className="text-xl leading-9 tracking-[-0.02em] text-slate-800">
+          <p className="text-xl leading-9 tracking-[-0.02em] text-slate-300">
             “{items[activeIndex].quote}”
           </p>
           <div className="mt-8">

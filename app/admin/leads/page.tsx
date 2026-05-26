@@ -1,6 +1,12 @@
+import Link from "next/link";
+
+import { AdminLeadStatusSelect } from "@/components/admin-lead-status-select";
+import { AdminLogoutButton } from "@/components/admin-logout-button";
 import { SectionWrapper } from "@/components/section-wrapper";
 import { connectToDatabase } from "@/lib/mongoose";
 import { Lead } from "@/models/Lead";
+
+export const dynamic = "force-dynamic";
 
 async function getLeads() {
   const connection = await connectToDatabase();
@@ -18,17 +24,28 @@ export default async function AdminLeadsPage() {
 
   return (
     <SectionWrapper>
-      <div className="mb-10">
-        <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[var(--color-accent)]">
-          Admin
-        </p>
-        <h1 className="mt-4 text-4xl font-semibold tracking-[-0.05em] text-[var(--color-primary)]">
-          Inbound Leads Dashboard
-        </h1>
-        <p className="mt-4 max-w-3xl text-base leading-8 text-slate-600">
-          Review inbound lead submissions captured through the RFQ modules and the
-          engineering desk support widget.
-        </p>
+      <div className="mb-10 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[var(--color-accent)]">
+            Admin
+          </p>
+          <h1 className="mt-4 text-4xl font-semibold tracking-[-0.05em] text-[var(--color-primary)]">
+            Inbound Leads Dashboard
+          </h1>
+          <p className="mt-4 max-w-3xl text-base leading-8 text-slate-600">
+            Review inbound lead submissions captured through the RFQ modules and the
+            engineering desk support widget.
+          </p>
+        </div>
+        <div className="flex flex-wrap gap-3">
+          <Link
+            href="/admin/site-config"
+            className="inline-flex items-center justify-center rounded-full border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-[var(--color-accent)] hover:text-[var(--color-primary)]"
+          >
+            Edit Site Config
+          </Link>
+          <AdminLogoutButton />
+        </div>
       </div>
       <div className="overflow-hidden rounded-[var(--radius-xl)] border border-slate-200 bg-white shadow-[0_18px_64px_rgba(8,17,31,0.06)]">
         <div className="overflow-x-auto">
@@ -59,9 +76,10 @@ export default async function AdminLeadsPage() {
                       {lead.technicalDetails}
                     </td>
                     <td className="px-5 py-4">
-                      <span className="inline-flex rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700">
-                        {lead.status}
-                      </span>
+                      <AdminLeadStatusSelect
+                        leadId={String(lead._id)}
+                        initialStatus={lead.status}
+                      />
                     </td>
                   </tr>
                 ))
