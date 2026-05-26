@@ -25,7 +25,8 @@
 - Reworked the engineering desk support UI into a responsive mobile bottom-sheet / desktop drawer layout.
 - Reworked the mobile navigation into a clean header-anchored responsive panel so the menu no longer hides behind the sticky header UI on phones.
 - Added a new reusable `offeringsGrid` section type and used it on the services page for a CMS-driven consultancy services matrix.
-- Installed `framer-motion`, `mongodb`, `clsx`, and `tailwind-merge`.
+- Replaced the JSON-based site-config editor with a recursive, proper UI input GenericEditor to prevent clients from editing keys and support deep nesting configuration logic.
+- Installed `lucide-react`, `framer-motion`, `mongodb`, `clsx`, and `tailwind-merge`.
 
 ## Remaining In Initial Phase
 
@@ -35,7 +36,6 @@
 - Add stronger internal linking between service pages, case study themes, and articles.
 - Audit the live site one more time for any page URLs outside the current sitemap and nav-based migration set.
 - Connect live MongoDB credentials and verify end-to-end lead persistence in production.
-- Replace the JSON-based site-config editor with richer field-by-field controls for non-technical admins.
 - Expand admin editing beyond config storage into dedicated media, page builder, and audit history workflows.
 - Extend the image manager beyond services so every non-service card collection has dedicated visual controls too.
 

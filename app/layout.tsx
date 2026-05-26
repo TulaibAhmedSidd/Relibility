@@ -131,7 +131,7 @@ export default async function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(founderSchema) }}
         />
-        <div className="relative min-h-screen overflow-hidden">
+        <div className="relative min-h-screen ">
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(0,194,255,0.14),transparent_28%),radial-gradient(circle_at_top_right,rgba(18,57,91,0.1),transparent_24%),linear-gradient(180deg,#ffffff,#f5f9fc_45%,#eef5fb)]" />
           <div className="pointer-events-none absolute inset-0 opacity-40 [background-image:linear-gradient(rgba(11,31,51,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(11,31,51,0.04)_1px,transparent_1px)] [background-size:36px_36px]" />
           <div className="relative z-10 flex min-h-screen flex-col">
