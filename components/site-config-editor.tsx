@@ -26,6 +26,7 @@ export function SiteConfigEditor({
   const [config, setConfig] = useState<SiteConfig>(initialConfig);
   const [message, setMessage] = useState(`Loaded from ${source}.`);
   const [saving, setSaving] = useState(false);
+  const [syncing, setSyncing] = useState(false);
 
   function updateSection<K extends keyof SiteConfig>(
     section: K,
@@ -109,6 +110,23 @@ export function SiteConfigEditor({
     }
   }
 
+  async function handleSync() {
+    if (!confirm("This will overwrite the database with the current site.config.ts file. Continue?")) return;
+    setSyncing(true);
+    setMessage("");
+    try {
+      const res = await fetch("/api/site-config/sync", { method: "POST" });
+      const data = (await res.json()) as { success: boolean; message?: string; config?: SiteConfig };
+      if (!res.ok || !data.success) throw new Error(data.message ?? "Sync failed.");
+      if (data.config) setConfig(data.config);
+      setMessage("✅ site.config.ts successfully synced to database.");
+    } catch (err) {
+      setMessage(err instanceof Error ? `❌ ${err.message}` : "❌ Sync failed.");
+    } finally {
+      setSyncing(false);
+    }
+  }
+
   const [activeTab, setActiveTab] = useState<string>("company");
 
   const sections: Array<{
@@ -184,14 +202,30 @@ export function SiteConfigEditor({
               </p>
             )}
           </div>
-          <button
-            type="button"
-            onClick={handleSave}
-            disabled={saving}
-            className="shrink-0 inline-flex items-center justify-center rounded-full bg-[var(--color-primary)] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[var(--color-secondary)] disabled:opacity-70"
-          >
-            {saving ? "Saving Changes..." : "Save Configuration"}
-          </button>
+          <div className="flex shrink-0 gap-3">
+            <button
+              type="button"
+              onClick={handleSync}
+              disabled={syncing || saving}
+              title="Overwrite DB with the current site.config.ts file"
+              className="inline-flex items-center gap-2 rounded-full border border-[var(--color-primary)] px-5 py-3 text-sm font-semibold text-[var(--color-primary)] transition hover:bg-[var(--color-primary)] hover:text-white disabled:opacity-50"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="16 16 12 12 8 16" />
+                <line x1="12" y1="12" x2="12" y2="21" />
+                <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3" />
+              </svg>
+              {syncing ? "Syncing..." : "Sync from site.config.ts"}
+            </button>
+            <button
+              type="button"
+              onClick={handleSave}
+              disabled={saving || syncing}
+              className="inline-flex items-center justify-center rounded-full bg-[var(--color-primary)] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[var(--color-secondary)] disabled:opacity-70"
+            >
+              {saving ? "Saving Changes..." : "Save Configuration"}
+            </button>
+          </div>
         </div>
 
         {/* Scrollable Form Area */}

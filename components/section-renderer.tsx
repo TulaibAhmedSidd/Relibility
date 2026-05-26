@@ -119,63 +119,65 @@ export async function SectionRenderer({ sections }: { sections: PageSection[] })
 
         if (section.type === "hero") {
           return (
-            <SectionWrapper key={`${section.type}-${index}`} className="pt-14 sm:pt-18 lg:pt-24">
-              <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[var(--color-accent)]">
-                    {section.eyebrow}
-                  </p>
-                  <h1 className="mt-6 max-w-5xl text-5xl font-semibold tracking-[-0.06em] text-[var(--color-primary)] sm:text-6xl lg:text-7xl">
-                    {section.title}
-                  </h1>
-                  <p className="mt-6 max-w-3xl text-lg leading-9 text-slate-600">
-                    {section.description}
-                  </p>
-                  <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-                    <Link
-                      href={section.primaryCta.href}
-                      className="inline-flex items-center justify-center rounded-full bg-[var(--color-primary)] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[var(--color-secondary)]"
-                    >
-                      {section.primaryCta.label}
-                    </Link>
-                    <Link
-                      href={section.secondaryCta.href}
-                      className="inline-flex items-center justify-center rounded-full border border-slate-300 px-6 py-3 text-sm font-semibold text-[var(--color-primary)] transition hover:border-[var(--color-accent)] hover:text-[var(--color-secondary)]"
-                    >
-                      {section.secondaryCta.label}
-                    </Link>
-                  </div>
-                </div>
-                <div className="relative overflow-hidden rounded-[var(--radius-xl)] border border-[rgba(0,194,255,0.18)] bg-[var(--gradient-hero)] p-8 text-white shadow-[var(--shadow-panel)]">
-                  {section.image ? (
-                    <Image
-                      src={section.image.src}
-                      alt={section.image.alt}
-                      fill
-                      className="object-cover opacity-28"
-                      sizes="(max-width: 1024px) 100vw, 40vw"
-                    />
-                  ) : null}
-                  <div className="absolute inset-0 opacity-25 [background-image:linear-gradient(rgba(255,255,255,0.2)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.2)_1px,transparent_1px)] [background-size:30px_30px]" />
-                  <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,17,31,0.28),rgba(8,17,31,0.58))]" />
-                  <div className="relative">
-                    <p className="text-sm font-semibold uppercase tracking-[0.28em] text-[var(--color-accent)]">
-                      Engineering Signals
+            <section
+              key={`${section.type}-${index}`}
+              className="relative flex min-h-[60vh] md:min-h-[85vh] items-center justify-center overflow-hidden bg-slate-900 bg-cover bg-fixed bg-center py-20 lg:py-32"
+              style={{
+                backgroundImage: section.image ? `url(${section.image.src})` : "none",
+              }}
+            >
+              {section.image && <div className="absolute inset-0 bg-black/40" />}
+              <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+                <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
+                  <div className="rounded-3xl border border-white/20 bg-white/75 p-8 sm:p-12 backdrop-blur-md shadow-2xl">
+                    <p className="text-xs font-bold uppercase tracking-[0.32em] text-[var(--color-primary)]">
+                      {section.eyebrow}
                     </p>
-                    <div className="mt-8 space-y-4">
-                      {section.highlights.map((highlight) => (
-                        <div
-                          key={highlight}
-                          className="rounded-2xl border border-white/10 bg-white/6 p-4 backdrop-blur"
-                        >
-                          <p className="text-sm leading-7 text-slate-100">{highlight}</p>
-                        </div>
-                      ))}
+                    <h1 className="mt-6 text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl drop-shadow-sm">
+                      {section.title}
+                    </h1>
+                    <p className="mt-6 text-lg font-medium leading-8 text-slate-800 drop-shadow-sm">
+                      {section.description}
+                    </p>
+                    <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+                      <Link
+                        href={section.primaryCta.href}
+                        className="inline-flex items-center justify-center rounded-full bg-[var(--color-primary)] px-8 py-4 text-sm font-bold text-white transition hover:bg-[var(--color-secondary)] shadow-md hover:shadow-lg"
+                      >
+                        {section.primaryCta.label}
+                      </Link>
+                      <Link
+                        href={section.secondaryCta.href}
+                        className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-sm font-bold text-[var(--color-primary)] transition hover:bg-slate-50 shadow-md hover:shadow-lg border border-slate-200"
+                      >
+                        {section.secondaryCta.label}
+                      </Link>
                     </div>
                   </div>
+                  {/* Optional Highlights Overlay */}
+                  {section.highlights && section.highlights.length > 0 && (
+                    <div className="relative overflow-hidden rounded-[var(--radius-xl)] border border-[rgba(255,255,255,0.3)] bg-black/40 p-8 text-white backdrop-blur-md shadow-2xl hidden lg:block">
+                      <div className="absolute inset-0 opacity-20 [background-image:linear-gradient(rgba(255,255,255,0.4)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.4)_1px,transparent_1px)] [background-size:24px_24px]" />
+                      <div className="relative">
+                        <p className="text-xs font-bold uppercase tracking-[0.28em] text-white">
+                          Engineering Signals
+                        </p>
+                        <div className="mt-6 space-y-4">
+                          {section.highlights.map((highlight) => (
+                            <div
+                              key={highlight}
+                              className="rounded-2xl border border-white/20 bg-white/10 p-4 backdrop-blur-sm shadow-sm"
+                            >
+                              <p className="text-sm font-medium leading-6 text-slate-100">{highlight}</p>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
-            </SectionWrapper>
+            </section>
           );
         }
 

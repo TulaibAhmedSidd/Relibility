@@ -230,7 +230,7 @@ const serviceCards = [
       "Reliability programs that reduce field risk, accelerate learning, and strengthen launch confidence.",
     meta: "Strategy, modeling, and failure prevention",
     image: {
-      src: "/services/analysis.svg",
+      src: "https://reliabilityqualitysolutions.com/wp-content/uploads/2025/08/prediction-1536x1021.webp",
       alt: "Reliability analysis illustration",
     },
   },
@@ -242,7 +242,7 @@ const serviceCards = [
       "Supplier development, incoming quality strategy, and escalation systems for global supply chains.",
     meta: "SQE leadership and containment workflows",
     image: {
-      src: "/services/supplier.svg",
+      src: "https://reliabilityqualitysolutions.com/wp-content/uploads/2025/08/CQE-Supplier-Management-System-Quality-and-Reliability-Assurance.webp",
       alt: "Supplier quality illustration",
     },
   },
@@ -254,7 +254,7 @@ const serviceCards = [
       "Coordinate engineering execution, decisions, and accountability around quality and reliability objectives.",
     meta: "Cross-functional program leadership",
     image: {
-      src: "/services/manufacturing.svg",
+      src: "https://reliabilityqualitysolutions.com/wp-content/uploads/2025/08/Engineering-Team-Collaboration-On-Site-Project-Management-Excellence.webp",
       alt: "Engineering project management illustration",
     },
   },
@@ -311,7 +311,7 @@ const serviceCards = [
       "Respond to customer complaints with structured containment, root-cause rigor, and sustained closure.",
     meta: "Containment, CAPA, and response management",
     image: {
-      src: "/services/quality.svg",
+      src: "https://reliabilityqualitysolutions.com/wp-content/uploads/2025/08/Customer-Complaints-Resolution-Enhancing-Satisfaction-Product-Quality.webp",
       alt: "Customer complaint resolution illustration",
     },
   },
@@ -534,6 +534,10 @@ const sharedCtaSection: CtaSection = {
   title: "Bring senior reliability and quality judgement into your next critical program.",
   description:
     "Whether you need a focused assessment or a long-term engineering partner, RQS can help your team move with more confidence.",
+  image: {
+    src: "https://reliabilityqualitysolutions.com/wp-content/uploads/2025/08/banner-image.webp",
+    alt: "RQS consultation banner",
+  },
   primaryCta: { label: "Contact RQS", href: "/contact-us" },
   secondaryCta: { label: "Explore Services", href: "/professional-engineering-consultancy-services-in-usa" },
 };
@@ -733,6 +737,10 @@ export const siteConfig: SiteConfig = {
           title: "Engineering reliability into every product decision.",
           description:
             "RQS helps engineering organizations reduce risk, validate faster, and launch with confidence through disciplined reliability and quality leadership built over 25+ years.",
+          image: {
+            src: "https://reliabilityqualitysolutions.com/wp-content/uploads/2025/08/slider-1-image.webp",
+            alt: "Engineering team consulting",
+          },
           primaryCta: { label: "Talk to an Expert", href: "/contact-us" },
           secondaryCta: { label: "View Services", href: "/professional-engineering-consultancy-services-in-usa" },
           highlights: [
